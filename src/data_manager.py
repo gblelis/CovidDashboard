@@ -12,6 +12,8 @@ RAW_DATA_DIR = SCRIPT_DIR + '\\data\\raw_data\\'
 OUTPUT_PARQUET_DIR = SCRIPT_DIR + '\\data\\parquet\\'
 
 class DataManager:
+    """Creates .parquet files to increases perfomance, loads datasets and filters."""
+
     def __init__(self,) -> None:
         try:
             if not os.path.exists(OUTPUT_PARQUET_DIR):
@@ -37,7 +39,11 @@ class DataManager:
             self.geojson = json.load(file)
             
     def _create_parquet(self,) -> None:
-        """Create parquet files."""
+        """Creates parquet files.
+
+        Raises:
+            Exception: If the Covid dataset download or the compression gets an error.
+        """
 
         url = 'https://data.brasil.io/dataset/covid19/caso_full.csv.gz'
 
