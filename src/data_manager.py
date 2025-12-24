@@ -35,7 +35,7 @@ class DataManager:
         self.df_last['city_ibge_code'] = pd.to_numeric(self.df_last['city_ibge_code'], errors='coerce').fillna(0).astype(int).astype(str)
 
         # ----- Load the GEOJSON
-        with open(RAW_DATA_DIR + 'geojson_br.json', 'r', encoding='utf-8') as file:
+        with open(RAW_DATA_DIR + 'geojson_br_optimized.json', 'r', encoding='utf-8') as file:
             self.geojson = json.load(file)
             
     def _create_parquet(self,) -> None:
