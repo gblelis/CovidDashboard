@@ -17,6 +17,8 @@ class COVIDDashboard:
         dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
         self.app = app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE, dbc_css])
 
+        self.server = self.app.server       # To use with gunicorn
+
         self._setup_layout()
         self._setup_callbacks()
 
@@ -398,7 +400,8 @@ class COVIDDashboard:
     def run(self, debug: bool = True, port: int = 8050) -> None:
         self.app.run(debug=debug, port=port)
 
+dashboard = COVIDDashboard()
+server = dashboard.server           # To use with gunicorn
 
 if __name__ == '__main__':
-    dashboard = COVIDDashboard()
     dashboard.run()
