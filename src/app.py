@@ -260,11 +260,7 @@ class COVIDDashboard:
                         ].sort_values(line_chart_y, ascending=False).head(10)[column_selected]
 
                     # ----- Grouping By CITY, STATE and DATE
-                    df_grouped_by_date_n_location = filtered_df[
-                        [column_selected, 'state', 'year-month', 'day', line_chart_y]
-                    ].groupby(
-                        [column_selected, 'state', 'year-month']
-                    ).max(['day', line_chart_y]).reset_index()
+                    df_grouped_by_date_n_location = self.data_manager.df_grouped_by_city.copy()
 
                     # ----- Filtering only the top 10 CITIES
                     df_grouped_by_date_n_location = df_grouped_by_date_n_location[
@@ -282,11 +278,7 @@ class COVIDDashboard:
                     top10 = self.data_manager.df_last[self.data_manager.df_last['place_type'] == column_selected].sort_values(line_chart_y, ascending=False).head(10)[column_selected]
 
                     # ----- Grouping By STATE and DATE
-                    df_grouped_by_date_n_location = filtered_df[
-                        [column_selected, 'year-month', 'day', line_chart_y]
-                    ].groupby(
-                        [column_selected, 'year-month']
-                    ).max(['day', line_chart_y]).reset_index()
+                    df_grouped_by_date_n_location = self.data_manager.df_grouped_by_state.copy()
                     
                     # ----- Filtering only the top 10 STATES
                     df_grouped_by_date_n_location = df_grouped_by_date_n_location[
